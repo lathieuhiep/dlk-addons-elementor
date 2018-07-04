@@ -45,7 +45,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
-                'name'      =>  'thumbnail',
+                'name'      =>  'dlk_team_member_image',
                 'default'   =>  'full',
                 'condition' =>  [
                     'dlk_team_member_image[url]!'   =>  '',
@@ -198,19 +198,25 @@ class Widget_DLK_Team_Member extends Widget_Base {
 
     protected function render() {
 
-        $settings = $this->get_settings();
+        $settings = $this->get_settings_for_display();
 
-        $team_member_image = $settings['dlk_team_member_image'];
+        $has_team_member_image = $settings['dlk_team_member_image']['url'];
 
     ?>
 
         <div class="dlk-team-member">
             <div class="dlk-team-member__inner">
-                <div class="dlk-team-member__image">
-                    <figure>
-                        <?php echo wp_get_attachment_image( $team_member_image['id'], 'thumbnail' ); ?>
-                    </figure>
-                </div>
+
+                <?php if ( $has_team_member_image ) : ?>
+
+                    <div class="dlk-team-member__image">
+                        <figure>
+                            <?php echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'dlk_team_member_image' ) ); ?>
+                        </figure>
+                    </div>
+
+                <?php endif; ?>
+
             </div>
         </div>
 
