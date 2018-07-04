@@ -30,6 +30,8 @@ class dlk_addons_elementor_widgets {
 
         require_once ( dlk_addons_elementor_server_path . '/includes/widgets/about-text.php' );
 
+        require_once ( dlk_addons_elementor_server_path . '/includes/widgets/team-members.php' );
+
     }
 
     private function dlk_addons_elementor_register_widget() {
