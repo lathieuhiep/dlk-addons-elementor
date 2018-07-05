@@ -206,17 +206,34 @@ class Widget_DLK_Team_Member extends Widget_Base {
 
         <div class="dlk-team-member">
             <div class="dlk-team-member__inner">
+                <div class="dlk-team-member__image">
+                    <figure>
+                        <?php
+                         if ( $has_team_member_image ) :
+                             echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'dlk_team_member_image' ) );
+                         else:
+                             $no_team_member_image  =   dlk_addons_elementor_path . 'assets/images/no-images.png';
+                         ?>
 
-                <?php if ( $has_team_member_image ) : ?>
+                            <img src="<?php echo esc_url( $no_team_member_image ) ?>" alt="<?php echo esc_attr( $settings['dlk_team_member_name'] ); ?>" />
 
-                    <div class="dlk-team-member__image">
-                        <figure>
-                            <?php echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'dlk_team_member_image' ) ); ?>
-                        </figure>
-                    </div>
+                         <?php endif; ?>
+                    </figure>
+                </div>
 
-                <?php endif; ?>
+                <div class="dlk-team-member__content">
+                    <h3 class="dlk-team-member__name">
+                        <?php echo esc_html( $settings['dlk_team_member_name'] ); ?>
+                    </h3>
 
+                    <h4 class="dlk-team-member__position">
+                        <?php echo esc_html( $settings['dlk_team_member_job_title'] ); ?>
+                    </h4>
+
+                    <p class="dlk-team-member__description">
+                        <?php echo esc_html( $settings['dlk_team_member_description'] ); ?>
+                    </p>
+                </div>
             </div>
         </div>
 

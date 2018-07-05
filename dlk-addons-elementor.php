@@ -101,7 +101,7 @@ if ( !class_exists( 'dlk_addons_elementor' ) ) :
         /* Frontend scripts */
         function dlk_addons_elementor_frontend_scripts() {
 
-            wp_enqueue_style( 'dlk-addons-elementor', wp_recent_posts_thumbs_path. 'assets/css/dlk-addons-elementor.css', array(), DLK_VERSION );
+            wp_enqueue_style( 'dlk-addons-elementor', dlk_addons_elementor_path. 'assets/css/dlk-addons-elementor.css', array(), DLK_VERSION );
 
         }
 
