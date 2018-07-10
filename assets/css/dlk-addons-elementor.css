@@ -8,6 +8,11 @@
   border-color: rgba(0, 0, 0, 0.15);
 }
 
+.dlk-team-member .dlk-team-member__image figure img {
+  display: block;
+  margin: 0 auto;
+}
+
 .dlk-team-member .dlk-team-member__content {
   text-align: center;
   padding: 10px;
