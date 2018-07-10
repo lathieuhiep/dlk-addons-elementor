@@ -2,5 +2,14 @@
 * Style addons for Elementor
 */
 
+// transition
+@mixin transition ($transition) {
+  -webkit-transition: $transition;
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  transition:         $transition;
+}
+
+
 /* Team Members */
 @import "addons-elementor/team-members";

@@ -1,2 +1,66 @@
-.dlk-team-member .dlk-team-member__name{font-size:20px;margin:0 0 10px}.dlk-team-member .dlk-team-member__position{font-size:14px;padding:0;margin:0 0 10px}
+/*
+* Style addons for Elementor
+*/
+/* Team Members */
+.dlk-team-member {
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.dlk-team-member .dlk-team-member__content {
+  text-align: center;
+  padding: 10px;
+}
+
+.dlk-team-member .dlk-team-member__name {
+  font-size: 20px;
+  color: #272727;
+  font-weight: bold;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.dlk-team-member .dlk-team-member__position {
+  font-size: 14px;
+  padding: 0;
+  font-weight: normal;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.dlk-team-member .dlk-team-member__social-profiles {
+  padding: 0;
+  margin: 0 0 10px;
+  list-style: none;
+}
+
+.dlk-team-member .dlk-team-member__social-link {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.dlk-team-member .dlk-team-member__social-link:last-child {
+  margin-right: 0;
+}
+
+.dlk-team-member .dlk-team-member__social-link a {
+  display: block;
+  color: #f1ba63;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.dlk-team-member .dlk-team-member__social-link a:hover {
+  color: #ad8647;
+}
+
+.dlk-team-member .dlk-team-member__description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
 /*# sourceMappingURL=dlk-addons-elementor.css.map */
