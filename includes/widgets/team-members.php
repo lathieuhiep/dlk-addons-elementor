@@ -45,11 +45,9 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->add_group_control(
             Group_Control_Image_Size::get_type(),
             [
-                'name'      =>  'dlk_team_member_image',
+                'name'      =>  'thumbnail',
                 'default'   =>  'full',
-                'condition' =>  [
-                    'dlk_team_member_image[url]!'   =>  '',
-                ],
+                'separator' =>  'none',
             ]
         );
 
@@ -183,12 +181,53 @@ class Widget_DLK_Team_Member extends Widget_Base {
                         'label_block'   =>  true,
                         'default'       =>  [
                             'url'           =>  '#',
-                            'is_external'   =>  'true',
+                            'is_external'   =>  true,
+                            'nofollow'      =>  false,
                         ],
                         'placeholder'       =>  esc_html__( 'Place URL here', 'dlk-addons-elementor' ),
                     ],
                 ],
                 'title_field' => '<i class="{{ social }}"></i> {{{ social.replace( \'fa fa-\', \'\' ).replace( \'-\', \' \' ).replace( /\b\w/g, function( letter ){ return letter.toUpperCase() } ) }}}',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'dlk_section_team_members_styles_general',
+            [
+                'label' =>  esc_html__( 'Team Member Styles', 'dlk-addons-elementor' ),
+                'tab'   =>  Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_alignment_content',
+            [
+                'label'     =>  esc_html__( 'Set Alignment Content', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::CHOOSE,
+                'options'   =>  [
+                    'left'  =>  [
+                        'title' =>  esc_html__( 'Left', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' =>  esc_html__( 'Center', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' =>  esc_html__( 'Right', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-right',
+                    ],
+                    'justify'=> [
+                        'title' =>  esc_html__( 'Justified', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-justify',
+                    ],
+                ],
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .dlk-team-member .dlk-team-member__content' => 'text-align: {{VALUE}};',
+                ],
             ]
         );
 
@@ -210,7 +249,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
                     <figure>
                         <?php
                          if ( $has_team_member_image ) :
-                             echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'dlk_team_member_image' ) );
+                             echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'thumbnail', 'dlk_team_member_image' ) );
                          else:
                              $no_team_member_image  =   dlk_addons_elementor_path . 'assets/images/no-images.png';
                          ?>
@@ -236,10 +275,11 @@ class Widget_DLK_Team_Member extends Widget_Base {
                             <?php
                             foreach ( $settings['dlk_team_member_social_profile_links'] as $item ) :
                                 $target = $item['link']['is_external'] ? ' target="_blank"' : '';
+                                $nofollow = $item['link']['nofollow'] ? ' rel="nofollow"' : '';
                             ?>
 
                             <li class="dlk-team-member__social-link">
-                                <a href="<?php echo esc_url( $item['link']['url'] ); ?>"<?php echo $target; ?>>
+                                <a href="<?php echo esc_url( $item['link']['url'] ); ?>"<?php echo $target . $nofollow; ?>>
                                     <i class="<?php echo esc_attr( $item['social'] ) ?>" aria-hidden="true"></i>
                                 </a>
                             </li>
@@ -262,6 +302,73 @@ class Widget_DLK_Team_Member extends Widget_Base {
 
     protected function _content_template() {
 
+    ?>
+
+        <#
+        var dlk_team_member_image = {
+                id: settings.dlk_team_member_image.id,
+                url: settings.dlk_team_member_image.url,
+                size: settings.thumbnail_size,
+                dimension: settings.thumbnail_custom_dimension,
+                model: view.getEditModel()
+        };
+
+        var image_url = elementor.imagesManager.getImageUrl( dlk_team_member_image );
+
+        if ( ! image_url ) {
+            return;
+        }
+
+        #>
+
+        <div class="dlk-team-member">
+            <div class="dlk-team-member__inner">
+                <div class="dlk-team-member__image">
+                    <figure>
+                        <img src="{{{ image_url }}}">
+                    </figure>
+                </div>
+
+                <div class="dlk-team-member__content">
+                    <h3 class="dlk-team-member__name">
+                        {{{ settings.dlk_team_member_name }}}
+                    </h3>
+
+                    <h4 class="dlk-team-member__position">
+                        {{{ settings.dlk_team_member_job_title }}}
+                    </h4>
+
+                    <# if ( settings.dlk_team_member_social_profile_links.length ) { #>
+
+                        <ul class="dlk-team-member__social-profiles">
+
+                            <#
+                            _.each( settings.dlk_team_member_social_profile_links, function( item ) {
+
+                            var target = item.link.is_external ? ' target="_blank"' : '';
+                            var nofollow = item.link.nofollow ? ' rel="nofollow"' : '';
+                            #>
+
+                                <li class="dlk-team-member__social-link">
+                                    <a href="{{ item.link.url }}"{{ target }}{{ nofollow }}>
+                                        <i class="{{ item.social }}" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+
+                            <# }); #>
+
+                        </ul>
+
+                    <# } #>
+
+                    <p class="dlk-team-member__description">
+                        {{{ settings.dlk_team_member_description }}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    <?php
 
     }
 
