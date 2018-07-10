@@ -182,7 +182,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
                         'type'          =>  Controls_Manager::URL,
                         'label_block'   =>  true,
                         'default'       =>  [
-                            'url'           =>  '',
+                            'url'           =>  '#',
                             'is_external'   =>  'true',
                         ],
                         'placeholder'       =>  esc_html__( 'Place URL here', 'dlk-addons-elementor' ),
@@ -229,6 +229,25 @@ class Widget_DLK_Team_Member extends Widget_Base {
                     <h4 class="dlk-team-member__position">
                         <?php echo esc_html( $settings['dlk_team_member_job_title'] ); ?>
                     </h4>
+
+                    <?php if ( !empty( $settings['dlk_team_member_social_profile_links'] ) ) : ?>
+
+                        <ul class="dlk-team-member__social-profiles">
+                            <?php
+                            foreach ( $settings['dlk_team_member_social_profile_links'] as $item ) :
+                                $target = $item['link']['is_external'] ? ' target="_blank"' : '';
+                            ?>
+
+                            <li class="dlk-team-member__social-link">
+                                <a href="<?php echo esc_url( $item['link']['url'] ); ?>"<?php echo $target; ?>>
+                                    <i class="<?php echo esc_attr( $item['social'] ) ?>" aria-hidden="true"></i>
+                                </a>
+                            </li>
+
+                            <?php endforeach; ?>
+                        </ul>
+
+                    <?php endif; ?>
 
                     <p class="dlk-team-member__description">
                         <?php echo esc_html( $settings['dlk_team_member_description'] ); ?>
