@@ -3,6 +3,8 @@
 */
 /* Team Members */
 .dlk-team-member {
+  position: relative;
+  overflow: hidden;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
   border-color: rgba(0, 0, 0, 0.15);
@@ -14,8 +16,23 @@
 }
 
 .dlk-team-member .dlk-team-member__content {
-  text-align: center;
   padding: 10px;
+}
+
+.dlk-team-member .dlk-team-member__content.alignment-content-left {
+  text-align: left;
+}
+
+.dlk-team-member .dlk-team-member__content.alignment-content-center {
+  text-align: center;
+}
+
+.dlk-team-member .dlk-team-member__content.alignment-content-right {
+  text-align: right;
+}
+
+.dlk-team-member .dlk-team-member__content.alignment-content-justify {
+  text-align: justify;
 }
 
 .dlk-team-member .dlk-team-member__name {
@@ -66,6 +83,39 @@
   margin: 0;
   font-size: 14px;
   line-height: 1.5em;
+}
+
+.dlk-team-members-overlay .dlk-team-member__content {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  opacity: 0;
+  visibility: hidden;
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.dlk-team-members-overlay:hover .dlk-team-member__content {
+  opacity: 1;
+  visibility: visible;
 }
 
 /*# sourceMappingURL=dlk-addons-elementor.css.map */

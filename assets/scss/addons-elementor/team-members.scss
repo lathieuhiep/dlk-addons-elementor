@@ -1,4 +1,6 @@
 .dlk-team-member {
+  position: relative;
+  overflow: hidden;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
   border-color: rgba(0,0,0,0.15);
@@ -12,8 +14,20 @@
     }
   }
   .dlk-team-member__content {
-    text-align: center;
     padding: 10px;
+
+    &.alignment-content-left {
+      text-align: left;
+    }
+    &.alignment-content-center {
+      text-align: center;
+    }
+    &.alignment-content-right {
+      text-align: right;
+    }
+    &.alignment-content-justify {
+      text-align: justify;
+    }
   }
   .dlk-team-member__name {
     font-size: 20px;
@@ -55,5 +69,27 @@
     margin: 0;
     font-size: 14px;
     line-height: 1.5em;
+  }
+}
+.dlk-team-members-overlay {
+  .dlk-team-member__content {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    opacity: 0;
+    visibility: hidden;
+    background-color: rgba(255,255,255,0.8);
+    @include transition(all 0.4s ease-in-out);
+    @include flexbox();
+    @include flex-direction-column();
+    @include justify-content(center);
+  }
+  &:hover {
+    .dlk-team-member__content {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
