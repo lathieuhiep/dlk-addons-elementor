@@ -202,9 +202,34 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_alignment_content',
+            'dlk_team_members_preset',
             [
-                'label'     =>  esc_html__( 'Set Alignment Content', 'dlk-addons-elementor' ),
+                'label'     =>  esc_html__( 'Style Preset', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::SELECT,
+                'default'   =>  'dlk-team-members-simple',
+                'options'   =>  [
+                    'dlk-team-members-simple'   =>  esc_html__( 'Simple Style', 'dlk-addons-elementor' ),
+                    'dlk-team-members-overlay'  =>  esc_html__( 'Overlay Style', 'dlk-addons-elementor' ),
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_background',
+            [
+                'label'     =>  esc_html__( 'Content Background Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .dlk-team-members-overlay .dlk-team-member__content'   =>  'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_alignment',
+            [
+                'label'     =>  esc_html__( 'Set Alignment', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::CHOOSE,
                 'options'   =>  [
                     'left'  =>  [
@@ -225,9 +250,6 @@ class Widget_DLK_Team_Member extends Widget_Base {
                     ],
                 ],
                 'default'   =>  '',
-                'selectors' =>  [
-                    '{{WRAPPER}} .dlk-team-member .dlk-team-member__content' => 'text-align: {{VALUE}};',
-                ],
             ]
         );
 
@@ -239,11 +261,19 @@ class Widget_DLK_Team_Member extends Widget_Base {
 
         $settings = $this->get_settings_for_display();
 
-        $has_team_member_image = $settings['dlk_team_member_image']['url'];
+        $team_member_classes    =   $settings['dlk_team_members_preset'];
+        $has_team_member_image  =   $settings['dlk_team_member_image']['url'];
+        $alignment_content      =   $settings['dlk_team_members_alignment'];
+
+        if ( !empty( $alignment_content ) ) :
+            $class_alignment_content = 'alignment-content-'.$alignment_content;
+        else:
+            $class_alignment_content = 'alignment-content-center';
+        endif;
 
     ?>
 
-        <div class="dlk-team-member">
+        <div class="dlk-team-member <?php echo esc_attr( $team_member_classes ); ?>">
             <div class="dlk-team-member__inner">
                 <div class="dlk-team-member__image">
                     <figure>
@@ -260,7 +290,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
                     </figure>
                 </div>
 
-                <div class="dlk-team-member__content">
+                <div class="dlk-team-member__content <?php echo esc_attr( $class_alignment_content ); ?>">
                     <h3 class="dlk-team-member__name">
                         <?php echo esc_html( $settings['dlk_team_member_name'] ); ?>
                     </h3>
@@ -319,9 +349,17 @@ class Widget_DLK_Team_Member extends Widget_Base {
             return;
         }
 
+        team_member_classes = settings.dlk_team_members_preset;
+
+        if ( '' !== settings.dlk_team_members_alignment ) {
+            class_alignment_content = 'alignment-content-' + settings.dlk_team_members_alignment;
+        }else{
+            class_alignment_content = 'alignment-content-center';
+        }
+
         #>
 
-        <div class="dlk-team-member">
+        <div class="dlk-team-member {{ team_member_classes }}">
             <div class="dlk-team-member__inner">
                 <div class="dlk-team-member__image">
                     <figure>
@@ -329,7 +367,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
                     </figure>
                 </div>
 
-                <div class="dlk-team-member__content">
+                <div class="dlk-team-member__content {{ class_alignment_content }}">
                     <h3 class="dlk-team-member__name">
                         {{{ settings.dlk_team_member_name }}}
                     </h3>
