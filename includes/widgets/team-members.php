@@ -253,6 +253,27 @@ class Widget_DLK_Team_Member extends Widget_Base {
             ]
         );
 
+        $this->add_responsive_control(
+            'dlk_team_members_content_padding',
+            [
+                'label'     =>  esc_html__( 'Content Padding', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'selectors' => [
+                    '{{WRAPPER}} .dlk-team-member .dlk-team-member__content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'dlk_team_members_border',
+                'label' => esc_html__( 'Border', 'dlk-addons-elementor' ),
+                'selector' => '{{WRAPPER}} .dlk-team-member',
+            ]
+        );
+
         $this->end_controls_section();
 
     }
