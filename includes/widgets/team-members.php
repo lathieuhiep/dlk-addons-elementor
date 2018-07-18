@@ -15,7 +15,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
     }
 
     public function get_title() {
-        return esc_html__( 'DLK Team Member', 'shoptheme' );
+        return esc_html__( 'DLK Team Member', 'dlk-addons-elementor' );
     }
 
     public function get_icon() {

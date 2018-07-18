@@ -28,6 +28,7 @@ class dlk_addons_elementor_widgets {
 
     private function dlk_addons_elementor_includes() {
 
+        require_once ( dlk_addons_elementor_server_path . '/includes/widgets/post-type.php' );
         require_once ( dlk_addons_elementor_server_path . '/includes/widgets/team-members.php' );
 
     }
@@ -47,3 +48,24 @@ class dlk_addons_elementor_widgets {
 }
 
 new dlk_addons_elementor_widgets();
+
+/* Start get Category check box */
+function dlk_check_get_cat( $type_taxonomy ) {
+
+    $cat_check    =   array();
+    $category     =   get_categories( array( 'taxonomy'   =>  $type_taxonomy ) );
+
+    if ( isset( $category ) && !empty( $category ) ):
+
+        foreach( $category as $item ) {
+
+            $cat_check[$item->term_id]  =   $item->name.'('. $item->count .')';
+
+        }
+
+    endif;
+
+    return $cat_check;
+
+}
+/* End get Category check box */
