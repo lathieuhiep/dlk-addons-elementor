@@ -274,6 +274,111 @@ class Widget_DLK_Team_Member extends Widget_Base {
             ]
         );
 
+        $this->add_responsive_control(
+            'dlk_team_members_border_radius',
+            [
+                'label'     =>  esc_html__( 'Border Radius', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::DIMENSIONS,
+                'selectors' => [
+                    '{{WRAPPER}} .dlk-team-member' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'dlk_section_team_members_typography',
+            [
+                'label' => esc_html__( 'Color &amp; Typography', 'dlk-addons-elementor' ),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_name_heading',
+            [
+                'label' => __( 'Member Name', 'dlk-addons-elementor' ),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_name_color',
+            [
+                'label'     =>  esc_html__( 'Member Name Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .dlk-team-member .dlk-team-member__name'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'dlk_team_members_name_typography',
+                'selector' => '{{WRAPPER}} .dlk-team-member__name',
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_position_heading',
+            [
+                'label' => __( 'Member Job Position', 'dlk-addons-elementor' ),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_position_color',
+            [
+                'label'     =>  esc_html__( 'Member Position Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .dlk-team-member .dlk-team-member__position'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'dlk_team_members_position_typography',
+                'selector' => '{{WRAPPER}} .dlk-team-member .dlk-team-member__position',
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_description_heading',
+            [
+                'label' => __( 'Member Description', 'dlk-addons-elementor' ),
+                'type' => Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_description_color',
+            [
+                'label'     =>  esc_html__( 'Member Description Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .dlk-team-member .dlk-team-member__description'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'dlk_team_members_description_typography',
+                'selector' => '{{WRAPPER}} .dlk-team-member .dlk-team-member__description',
+            ]
+        );
+
         $this->end_controls_section();
 
     }
