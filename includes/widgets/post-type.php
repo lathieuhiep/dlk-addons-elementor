@@ -70,7 +70,7 @@ class Widget_DLK_Post_type extends Widget_Base {
         $this->add_control(
             'dlk_post_type_limit',
             [
-                'label'     =>  esc_html__( 'Limit', 'dlk-addons-elementor' ),
+                'label'     =>  esc_html__( 'Number of Posts', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::NUMBER,
                 'default'   =>  6,
                 'min'       =>  1,
@@ -86,9 +86,12 @@ class Widget_DLK_Post_type extends Widget_Base {
                 'type'      =>  Controls_Manager::SELECT,
                 'default'   =>  'id',
                 'options'   =>  [
-                    'id'    =>  esc_html__( 'ID', 'dlk-addons-elementor' ),
-                    'name'  =>  esc_html__( 'Name', 'dlk-addons-elementor' ),
-                    'date'  =>  esc_html__( 'Date', 'dlk-addons-elementor' ),
+                    'id'            =>  esc_html__( 'Post ID', 'dlk-addons-elementor' ),
+                    'author'        =>  esc_html__( 'Post Author', 'dlk-addons-elementor' ),
+                    'title'         =>  esc_html__( 'Title', 'dlk-addons-elementor' ),
+                    'date'          =>  esc_html__( 'Date', 'dlk-addons-elementor' ),
+                    'rand'          =>  esc_html__( 'Random', 'dlk-addons-elementor' ),
+                    'comment_count' =>  esc_html__( 'Comment count', 'dlk-addons-elementor' ),
                 ],
             ]
         );
@@ -100,8 +103,8 @@ class Widget_DLK_Post_type extends Widget_Base {
                 'type'      =>  Controls_Manager::SELECT,
                 'default'   =>  'ASC',
                 'options'   =>  [
-                    'ASC'   =>  esc_html__( 'ASC', 'dlk-addons-elementor' ),
-                    'DESC'  =>  esc_html__( 'DESC', 'dlk-addons-elementor' ),
+                    'ASC'   =>  esc_html__( 'Ascending', 'dlk-addons-elementor' ),
+                    'DESC'  =>  esc_html__( 'Descending', 'dlk-addons-elementor' ),
                 ],
             ]
         );
