@@ -381,6 +381,57 @@ class Widget_DLK_Team_Member extends Widget_Base {
 
         $this->end_controls_section();
 
+        $this->start_controls_section(
+            'dlk_section_team_members_social_profiles_styles',
+            [
+                'label' => esc_html__( 'Social Profiles Style', 'dlk-addons-elementor' ),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_social_icon_color',
+            [
+                'label'     =>  esc_html__( 'Icon Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .dlk-team-member .dlk-team-member__social-link a'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_social_icon_color_hover',
+            [
+                'label'     =>  esc_html__( 'Icon Color Hover', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .dlk-team-member .dlk-team-member__social-link a:hover'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'dlk_team_members_social_icon_size',
+            [
+                'label' => esc_html__( 'Size', 'elementor' ),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .dlk-team-member .dlk-team-member__social-link a' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
     }
 
     protected function render() {
