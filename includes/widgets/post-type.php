@@ -19,7 +19,7 @@ class Widget_DLK_Post_type extends Widget_Base {
     }
 
     public function get_icon() {
-        return ' eicon-post';
+        return 'eicon-post';
     }
 
     protected function _register_controls() {
@@ -165,7 +165,7 @@ class Widget_DLK_Post_type extends Widget_Base {
         endif;
     }
 
-    protected function _content_dlk_post_type_() {}
+    protected function content_template() {}
 
 }
 
