@@ -25,14 +25,14 @@ class Widget_DLK_Team_Member extends Widget_Base {
     protected function _register_controls() {
 
         $this->start_controls_section(
-            'dlk_section_team_member_image',
+            'section_team_member_image',
             [
                 'label' =>  esc_html__( 'Team Member Image', 'dlk-addons-elementor' )
             ]
         );
 
         $this->add_control(
-            'dlk_team_member_image',
+            'team_member_image',
             [
                 'label'     =>  esc_html__( 'Team Member Avatar', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::MEDIA,
@@ -54,14 +54,14 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->end_controls_section();
 
         $this->start_controls_section(
-            'dlk_section_team_member_content',
+            'section_team_member_content',
             [
                 'label' =>  esc_html__( 'Team Member Content', 'dlk-addons-elementor' )
             ]
         );
 
         $this->add_control(
-            'dlk_team_member_name',
+            'team_member_name',
             [
                 'label'     =>  esc_html__( 'Name', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::TEXT,
@@ -70,7 +70,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_member_job_title',
+            'team_member_job_title',
             [
                 'label'     =>  esc_html__( 'Job Position', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::TEXT,
@@ -79,7 +79,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_member_description',
+            'team_member_description',
             [
                 'label'     =>  esc_html__( 'Description', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::TEXTAREA,
@@ -90,14 +90,14 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->end_controls_section();
 
         $this->start_controls_section(
-            'dlk_section_team_member_social_profiles',
+            'section_team_member_social_profiles',
             [
                 'label' =>  esc_html__( 'Social Profiles', 'dlk-addons-elementor' )
             ]
         );
 
         $this->add_control(
-            'dlk_team_member_enable_social_profiles',
+            'team_member_enable_social_profiles',
             [
                 'label'     =>  esc_html__( 'Display Social Profiles?', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::SWITCHER,
@@ -106,11 +106,11 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_member_social_profile_links',
+            'team_member_social_profile_links',
             [
                 'type'      =>  Controls_Manager::REPEATER,
                 'condition' =>  [
-                    'dlk_team_member_enable_social_profiles!'   =>  '',
+                    'team_member_enable_social_profiles!'   =>  '',
                 ],
                 'default'   =>  [
                     [
@@ -194,7 +194,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->end_controls_section();
 
         $this->start_controls_section(
-            'dlk_section_team_members_styles_general',
+            'section_team_members_styles_general',
             [
                 'label' =>  esc_html__( 'Team Member Styles', 'dlk-addons-elementor' ),
                 'tab'   =>  Controls_Manager::TAB_STYLE
@@ -202,7 +202,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_preset',
+            'team_members_preset',
             [
                 'label'     =>  esc_html__( 'Style Preset', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::SELECT,
@@ -215,7 +215,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_background',
+            'team_members_background',
             [
                 'label'     =>  esc_html__( 'Content Background Color', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::COLOR,
@@ -227,7 +227,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_alignment',
+            'team_members_alignment',
             [
                 'label'     =>  esc_html__( 'Set Alignment', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::CHOOSE,
@@ -254,7 +254,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'dlk_team_members_content_padding',
+            'team_members_content_padding',
             [
                 'label'     =>  esc_html__( 'Content Padding', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::DIMENSIONS,
@@ -268,14 +268,14 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->add_group_control(
             Group_Control_Border::get_type(),
             [
-                'name' => 'dlk_team_members_border',
+                'name' => 'team_members_border',
                 'label' => esc_html__( 'Border', 'dlk-addons-elementor' ),
                 'selector' => '{{WRAPPER}} .dlk-team-member',
             ]
         );
 
         $this->add_responsive_control(
-            'dlk_team_members_border_radius',
+            'team_members_border_radius',
             [
                 'label'     =>  esc_html__( 'Border Radius', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::DIMENSIONS,
@@ -288,7 +288,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->end_controls_section();
 
         $this->start_controls_section(
-            'dlk_section_team_members_typography',
+            'section_team_members_typography',
             [
                 'label' => esc_html__( 'Color &amp; Typography', 'dlk-addons-elementor' ),
                 'tab' => Controls_Manager::TAB_STYLE
@@ -296,7 +296,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_name_heading',
+            'team_members_name_heading',
             [
                 'label' => __( 'Member Name', 'dlk-addons-elementor' ),
                 'type' => Controls_Manager::HEADING,
@@ -304,7 +304,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_name_color',
+            'team_members_name_color',
             [
                 'label'     =>  esc_html__( 'Member Name Color', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::COLOR,
@@ -318,13 +318,13 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'dlk_team_members_name_typography',
+                'name' => 'team_members_name_typography',
                 'selector' => '{{WRAPPER}} .dlk-team-member__name',
             ]
         );
 
         $this->add_control(
-            'dlk_team_members_position_heading',
+            'team_members_position_heading',
             [
                 'label' => __( 'Member Job Position', 'dlk-addons-elementor' ),
                 'type' => Controls_Manager::HEADING,
@@ -332,7 +332,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_position_color',
+            'team_members_position_color',
             [
                 'label'     =>  esc_html__( 'Member Position Color', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::COLOR,
@@ -346,13 +346,13 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'dlk_team_members_position_typography',
+                'name' => 'team_members_position_typography',
                 'selector' => '{{WRAPPER}} .dlk-team-member .dlk-team-member__position',
             ]
         );
 
         $this->add_control(
-            'dlk_team_members_description_heading',
+            'team_members_description_heading',
             [
                 'label' => __( 'Member Description', 'dlk-addons-elementor' ),
                 'type' => Controls_Manager::HEADING,
@@ -360,7 +360,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_description_color',
+            'team_members_description_color',
             [
                 'label'     =>  esc_html__( 'Member Description Color', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::COLOR,
@@ -374,7 +374,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name' => 'dlk_team_members_description_typography',
+                'name' => 'team_members_description_typography',
                 'selector' => '{{WRAPPER}} .dlk-team-member .dlk-team-member__description',
             ]
         );
@@ -382,7 +382,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         $this->end_controls_section();
 
         $this->start_controls_section(
-            'dlk_section_team_members_social_profiles_styles',
+            'section_team_members_social_profiles_styles',
             [
                 'label' => esc_html__( 'Social Profiles Style', 'dlk-addons-elementor' ),
                 'tab' => Controls_Manager::TAB_STYLE
@@ -390,7 +390,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_social_icon_color',
+            'team_members_social_icon_color',
             [
                 'label'     =>  esc_html__( 'Icon Color', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::COLOR,
@@ -402,7 +402,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_social_icon_color_hover',
+            'team_members_social_icon_color_hover',
             [
                 'label'     =>  esc_html__( 'Icon Color Hover', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::COLOR,
@@ -414,7 +414,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_team_members_social_icon_size',
+            'team_members_social_icon_size',
             [
                 'label' => esc_html__( 'Size', 'elementor' ),
                 'type' => Controls_Manager::SLIDER,
@@ -438,9 +438,9 @@ class Widget_DLK_Team_Member extends Widget_Base {
 
         $settings = $this->get_settings_for_display();
 
-        $team_member_classes    =   $settings['dlk_team_members_preset'];
-        $has_team_member_image  =   $settings['dlk_team_member_image']['url'];
-        $alignment_content      =   $settings['dlk_team_members_alignment'];
+        $team_member_classes    =   $settings['team_members_preset'];
+        $has_team_member_image  =   $settings['team_member_image']['url'];
+        $alignment_content      =   $settings['team_members_alignment'];
 
         if ( !empty( $alignment_content ) ) :
             $class_alignment_content = 'alignment-content-'.$alignment_content;
@@ -456,12 +456,12 @@ class Widget_DLK_Team_Member extends Widget_Base {
                     <figure>
                         <?php
                          if ( $has_team_member_image ) :
-                             echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'thumbnail', 'dlk_team_member_image' ) );
+                             echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'thumbnail', 'team_member_image' ) );
                          else:
                              $no_team_member_image  =   dlk_addons_elementor_path . 'assets/images/no-images.png';
                          ?>
 
-                            <img src="<?php echo esc_url( $no_team_member_image ) ?>" alt="<?php echo esc_attr( $settings['dlk_team_member_name'] ); ?>" />
+                            <img src="<?php echo esc_url( $no_team_member_image ) ?>" alt="<?php echo esc_attr( $settings['team_member_name'] ); ?>" />
 
                          <?php endif; ?>
                     </figure>
@@ -469,18 +469,18 @@ class Widget_DLK_Team_Member extends Widget_Base {
 
                 <div class="dlk-team-member__content <?php echo esc_attr( $class_alignment_content ); ?>">
                     <h3 class="dlk-team-member__name">
-                        <?php echo esc_html( $settings['dlk_team_member_name'] ); ?>
+                        <?php echo esc_html( $settings['team_member_name'] ); ?>
                     </h3>
 
                     <h4 class="dlk-team-member__position">
-                        <?php echo esc_html( $settings['dlk_team_member_job_title'] ); ?>
+                        <?php echo esc_html( $settings['team_member_job_title'] ); ?>
                     </h4>
 
-                    <?php if ( !empty( $settings['dlk_team_member_social_profile_links'] ) ) : ?>
+                    <?php if ( !empty( $settings['team_member_social_profile_links'] ) ) : ?>
 
                         <ul class="dlk-team-member__social-profiles">
                             <?php
-                            foreach ( $settings['dlk_team_member_social_profile_links'] as $item ) :
+                            foreach ( $settings['team_member_social_profile_links'] as $item ) :
                                 $target = $item['link']['is_external'] ? ' target="_blank"' : '';
                                 $nofollow = $item['link']['nofollow'] ? ' rel="nofollow"' : '';
                             ?>
@@ -497,7 +497,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
                     <?php endif; ?>
 
                     <p class="dlk-team-member__description">
-                        <?php echo esc_html( $settings['dlk_team_member_description'] ); ?>
+                        <?php echo esc_html( $settings['team_member_description'] ); ?>
                     </p>
                 </div>
             </div>
@@ -512,24 +512,24 @@ class Widget_DLK_Team_Member extends Widget_Base {
     ?>
 
         <#
-        var dlk_team_member_image = {
-                id: settings.dlk_team_member_image.id,
-                url: settings.dlk_team_member_image.url,
-                size: settings.thumbnail_size,
-                dimension: settings.thumbnail_custom_dimension,
-                model: view.getEditModel()
+        var team_member_image = {
+            id: settings.team_member_image.id,
+            url: settings.team_member_image.url,
+            size: settings.thumbnail_size,
+            dimension: settings.thumbnail_custom_dimension,
+            model: view.getEditModel()
         };
 
-        var image_url = elementor.imagesManager.getImageUrl( dlk_team_member_image );
+        var image_url = elementor.imagesManager.getImageUrl( team_member_image );
 
         if ( ! image_url ) {
             return;
         }
 
-        team_member_classes = settings.dlk_team_members_preset;
+        team_member_classes = settings.team_members_preset;
 
-        if ( '' !== settings.dlk_team_members_alignment ) {
-            class_alignment_content = 'alignment-content-' + settings.dlk_team_members_alignment;
+        if ( '' !== settings.team_members_alignment ) {
+            class_alignment_content = 'alignment-content-' + settings.team_members_alignment;
         }else{
             class_alignment_content = 'alignment-content-center';
         }
@@ -546,19 +546,19 @@ class Widget_DLK_Team_Member extends Widget_Base {
 
                 <div class="dlk-team-member__content {{ class_alignment_content }}">
                     <h3 class="dlk-team-member__name">
-                        {{{ settings.dlk_team_member_name }}}
+                        {{{ settings.team_member_name }}}
                     </h3>
 
                     <h4 class="dlk-team-member__position">
-                        {{{ settings.dlk_team_member_job_title }}}
+                        {{{ settings.team_member_job_title }}}
                     </h4>
 
-                    <# if ( settings.dlk_team_member_social_profile_links.length ) { #>
+                    <# if ( settings.team_member_social_profile_links.length ) { #>
 
                         <ul class="dlk-team-member__social-profiles">
 
                             <#
-                            _.each( settings.dlk_team_member_social_profile_links, function( item ) {
+                            _.each( settings.team_member_social_profile_links, function( item ) {
 
                             var target = item.link.is_external ? ' target="_blank"' : '';
                             var nofollow = item.link.nofollow ? ' rel="nofollow"' : '';
@@ -577,7 +577,7 @@ class Widget_DLK_Team_Member extends Widget_Base {
                     <# } #>
 
                     <p class="dlk-team-member__description">
-                        {{{ settings.dlk_team_member_description }}}
+                        {{{ settings.team_member_description }}}
                     </p>
                 </div>
             </div>
