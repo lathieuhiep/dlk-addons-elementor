@@ -25,14 +25,14 @@ class Widget_DLK_Post_type extends Widget_Base {
     protected function _register_controls() {
 
         $this->start_controls_section(
-            'dlk_section_post_type',
+            'section_post_type',
             [
                 'label' =>  esc_html__( 'Post Type', 'dlk-addons-elementor' )
             ]
         );
 
         $this->add_control(
-            'dlk_post_type_title',
+            'title',
             [
                 'label'         =>  esc_html__( 'Title', 'dlk-addons-elementor' ),
                 'type'          =>  Controls_Manager::TEXT,
@@ -42,7 +42,7 @@ class Widget_DLK_Post_type extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_post_type__column_number',
+            'column_number',
             [
                 'label'     =>  esc_html__( 'Column', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::SELECT,
@@ -57,7 +57,7 @@ class Widget_DLK_Post_type extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_post_type_select_cat',
+            'select_cat',
             [
                 'label'         =>  esc_html__( 'Select Category Post', 'dlk-addons-elementor' ),
                 'type'          =>  Controls_Manager::SELECT2,
@@ -68,7 +68,7 @@ class Widget_DLK_Post_type extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_post_type_limit',
+            'limit',
             [
                 'label'     =>  esc_html__( 'Number of Posts', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::NUMBER,
@@ -80,7 +80,7 @@ class Widget_DLK_Post_type extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_post_type_order_by',
+            'order_by',
             [
                 'label'     =>  esc_html__( 'Order By', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::SELECT,
@@ -97,7 +97,7 @@ class Widget_DLK_Post_type extends Widget_Base {
         );
 
         $this->add_control(
-            'dlk_post_type_order',
+            'order',
             [
                 'label'     =>  esc_html__( 'Order', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::SELECT,
@@ -116,14 +116,14 @@ class Widget_DLK_Post_type extends Widget_Base {
     protected function render() {
 
         $settings       =   $this->get_settings_for_display();
-        $cat_post       =   $settings['dlk_post_type_select_cat'];
-        $limit_post     =   $settings['dlk_post_type_limit'];
-        $order_by_post  =   $settings['dlk_post_type_order_by'];
-        $order_post     =   $settings['dlk_post_type_order'];
+        $cat_post       =   $settings['select_cat'];
+        $limit_post     =   $settings['limit'];
+        $order_by_post  =   $settings['order_by'];
+        $order_post     =   $settings['order'];
 
         if ( !empty( $cat_post ) ) :
 
-            $dlk_post_type_arg = array(
+            $post_type_arg = array(
                 'post_type'         =>  'post',
                 'posts_per_page'    =>  $limit_post,
                 'orderby'           =>  $order_by_post,
@@ -133,7 +133,7 @@ class Widget_DLK_Post_type extends Widget_Base {
 
         else:
 
-            $dlk_post_type_arg = array(
+            $post_type_arg = array(
                 'post_type'         =>  'post',
                 'posts_per_page'    =>  $limit_post,
                 'orderby'           =>  $order_by_post,
@@ -142,22 +142,24 @@ class Widget_DLK_Post_type extends Widget_Base {
 
         endif;
 
-        $dlk_post_type_query = new \ WP_Query( $dlk_post_type_arg );
+        $post_type_query = new \ WP_Query( $post_type_arg );
 
-        if ( $dlk_post_type_query->have_posts() ) :
+        if ( $post_type_query->have_posts() ) :
 
     ?>
 
         <div class="dlk-post-type">
+            <div class="row">
+                <?php while ( $post_type_query->have_posts() ): $post_type_query->the_post(); ?>
 
-            <?php while ( $dlk_post_type_query->have_posts() ): $dlk_post_type_query->the_post(); ?>
+                <div class="col-12 col-sm-6 col-md-4 col-lg-<?php echo esc_attr( 12 / $settings['column_number'] ); ?>">
+                    <h3>
+                        <?php the_title(); ?>
+                    </h3>
+                </div>
 
-                <h3>
-                    <?php the_title(); ?>
-                </h3>
-
-            <?php endwhile; wp_reset_postdata(); ?>
-
+                <?php endwhile; wp_reset_postdata(); ?>
+            </div>
         </div>
 
     <?php
