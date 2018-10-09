@@ -25,9 +25,9 @@ class Widget_DLK_Post_type extends Widget_Base {
     protected function _register_controls() {
 
         $this->start_controls_section(
-            'section_post_type',
+            'section_query',
             [
-                'label' =>  esc_html__( 'Post Type', 'dlk-addons-elementor' )
+                'label' =>  esc_html__( 'Query', 'dlk-addons-elementor' )
             ]
         );
 
@@ -38,21 +38,6 @@ class Widget_DLK_Post_type extends Widget_Base {
                 'type'          =>  Controls_Manager::TEXT,
                 'default'       =>  esc_html__( 'Post', 'dlk-addons-elementor' ),
                 'label_block'   =>  true
-            ]
-        );
-
-        $this->add_control(
-            'column_number',
-            [
-                'label'     =>  esc_html__( 'Column', 'dlk-addons-elementor' ),
-                'type'      =>  Controls_Manager::SELECT,
-                'default'   =>  3,
-                'options'   =>  [
-                    4   =>  esc_html__( '4 Column', 'dlk-addons-elementor' ),
-                    3   =>  esc_html__( '3 Column', 'dlk-addons-elementor' ),
-                    2   =>  esc_html__( '2 Column', 'dlk-addons-elementor' ),
-                    1   =>  esc_html__( '1 Column', 'dlk-addons-elementor' ),
-                ],
             ]
         );
 
@@ -111,6 +96,70 @@ class Widget_DLK_Post_type extends Widget_Base {
 
         $this->end_controls_section();
 
+        $this->start_controls_section(
+            'section_layout',
+            [
+                'label' =>  esc_html__( 'Layout Settings', 'dlk-addons-elementor' )
+            ]
+        );
+
+        $this->add_control(
+            'column_number',
+            [
+                'label'     =>  esc_html__( 'Column', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::SELECT,
+                'default'   =>  3,
+                'options'   =>  [
+                    4   =>  esc_html__( '4 Column', 'dlk-addons-elementor' ),
+                    3   =>  esc_html__( '3 Column', 'dlk-addons-elementor' ),
+                    2   =>  esc_html__( '2 Column', 'dlk-addons-elementor' ),
+                    1   =>  esc_html__( '1 Column', 'dlk-addons-elementor' ),
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Image_Size::get_type(),
+            [
+                'name'      =>  'thumbnail',
+                'exclude'   =>  [ 'custom' ],
+                'default'   =>  'medium_large',
+            ]
+        );
+
+        $this->add_control(
+            'show_excerpt',
+            [
+                'label'     =>  esc_html__( 'Show excerpt', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::CHOOSE,
+                'options'   =>  [
+                    '1' => [
+                        'title' =>  esc_html__( 'Yes', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-check',
+                    ],
+                    '0' => [
+                        'title' =>  esc_html__( 'No', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-ban',
+                    ]
+                ],
+                'default' => '1'
+            ]
+        );
+
+        $this->add_control(
+            'excerpt_length',
+            [
+                'label'     =>  esc_html__( 'Excerpt Words', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::NUMBER,
+                'default'   =>  '10',
+                'condition' =>  [
+                    'show_excerpt' => '1',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
     }
 
     protected function render() {
@@ -148,14 +197,38 @@ class Widget_DLK_Post_type extends Widget_Base {
 
     ?>
 
-        <div class="dlk-post-type">
+        <div class="element-post-type">
             <div class="row">
                 <?php while ( $post_type_query->have_posts() ): $post_type_query->the_post(); ?>
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-<?php echo esc_attr( 12 / $settings['column_number'] ); ?>">
-                    <h3>
-                        <?php the_title(); ?>
-                    </h3>
+                    <div class="item-post">
+                        <div class="item-post__thumbnail">
+                            <img src="<?php echo esc_url( Group_Control_Image_Size::get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'thumbnail', $settings ) ); ?>" alt="<?php the_title(); ?>">
+                        </div>
+
+                        <h2 class="item-post__title">
+                            <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+                                <?php the_title(); ?>
+                            </a>
+                        </h2>
+
+                        <?php if ( $settings['show_excerpt'] == 1 ) : ?>
+
+                            <div class="item-post__content">
+                                <p>
+                                    <?php
+                                    if ( has_excerpt() ) :
+                                        echo esc_html( wp_trim_words( get_the_excerpt(), $settings['excerpt_length'], '...' ) );
+                                    else:
+                                        echo esc_html( wp_trim_words( get_the_content(), $settings['excerpt_length'], '...' ) );
+                                    endif;
+                                    ?>
+                                </p>
+                            </div>
+
+                        <?php endif; ?>
+                    </div>
                 </div>
 
                 <?php endwhile; wp_reset_postdata(); ?>

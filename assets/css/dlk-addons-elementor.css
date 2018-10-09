@@ -1682,4 +1682,24 @@ html {
   visibility: visible;
 }
 
+/* Post Type */
+.element-post-type .item-post .item-post__thumbnail {
+  margin-bottom: 15px;
+}
+
+.element-post-type .item-post .item-post__title {
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+}
+
+.element-post-type .item-post .item-post__content {
+  margin-top: 15px;
+}
+
+.element-post-type .item-post .item-post__content p {
+  margin: 0;
+  font-size: 14px;
+}
+
 /*# sourceMappingURL=dlk-addons-elementor.css.map */
