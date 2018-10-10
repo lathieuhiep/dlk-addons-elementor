@@ -29,6 +29,9 @@
 
 @import "bootstrap-grid/bootstrap-grid";
 
+a {
+  @include transition( all 0.4s ease-in-out );
+}
 /* Team Members */
 @import "addons-elementor/team-members";
 

@@ -24,6 +24,7 @@ class Widget_DLK_Post_type extends Widget_Base {
 
     protected function _register_controls() {
 
+        /* Section Query */
         $this->start_controls_section(
             'section_query',
             [
@@ -96,6 +97,7 @@ class Widget_DLK_Post_type extends Widget_Base {
 
         $this->end_controls_section();
 
+        /* Section Layout */
         $this->start_controls_section(
             'section_layout',
             [
@@ -155,6 +157,140 @@ class Widget_DLK_Post_type extends Widget_Base {
                 'condition' =>  [
                     'show_excerpt' => '1',
                 ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /* Section style title */
+        $this->start_controls_section(
+            'section_style_title',
+            [
+                'label' => esc_html__( 'Title', 'dlk-addons-elementor' ),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_control(
+            'title_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-post-type .item-post .item-post__title a'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'title_color_hover',
+            [
+                'label'     =>  esc_html__( 'Color Hover', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-post-type .item-post .item-post__title a:hover'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'title_typography',
+                'selector' => '{{WRAPPER}} .element-post-type .item-post .item-post__title',
+            ]
+        );
+
+        $this->add_control(
+            'title_alignment',
+            [
+                'label'     =>  esc_html__( 'Title Alignment', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::CHOOSE,
+                'options'   =>  [
+                    'left'  =>  [
+                        'title' =>  esc_html__( 'Left', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' =>  esc_html__( 'Center', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' =>  esc_html__( 'Right', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-right',
+                    ],
+                    'justify'=> [
+                        'title' =>  esc_html__( 'Justified', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-justify',
+                    ],
+                ],
+                'toggle'    =>  true,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-post-type .item-post .item-post__title'   =>  'text-align: {{VALUE}};',
+                ]
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /* Section style excerpt  */
+        $this->start_controls_section(
+            'section_style_excerpt',
+            [
+                'label' => esc_html__( 'Excerpt', 'dlk-addons-elementor' ),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_control(
+            'excerpt_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-post-type .item-post .item-post__content p'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'excerpt_typography',
+                'selector' => '{{WRAPPER}} .element-post-type .item-post .item-post__content p',
+            ]
+        );
+
+        $this->add_control(
+            'excerpt_alignment',
+            [
+                'label'     =>  esc_html__( 'Excerpt Alignment', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::CHOOSE,
+                'options'   =>  [
+                    'left'  =>  [
+                        'title' =>  esc_html__( 'Left', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' =>  esc_html__( 'Center', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' =>  esc_html__( 'Right', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-right',
+                    ],
+                    'justify'=> [
+                        'title' =>  esc_html__( 'Justified', 'dlk-addons-elementor' ),
+                        'icon'  =>  'fa fa-align-justify',
+                    ],
+                ],
+                'toggle'    =>  true,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-post-type .item-post .item-post__content p'   =>  'text-align: {{VALUE}};',
+                ]
             ]
         );
 
