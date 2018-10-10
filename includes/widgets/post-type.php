@@ -4,7 +4,7 @@ namespace Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Widget_DLK_Post_type extends Widget_Base {
+class Widget_DLK_Post_Type extends Widget_Base {
 
     public function get_categories() {
         return array( 'dlk-addons-elementor' );
@@ -380,4 +380,4 @@ class Widget_DLK_Post_type extends Widget_Base {
 
 }
 
-Plugin::instance()->widgets_manager->register_widget_type( new Widget_DLK_Post_type );
+Plugin::instance()->widgets_manager->register_widget_type( new Widget_DLK_Post_Type );
