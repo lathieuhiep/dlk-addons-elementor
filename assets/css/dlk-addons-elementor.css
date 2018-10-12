@@ -1569,6 +1569,10 @@ html {
   }
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
 a {
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
@@ -1709,4 +1713,98 @@ a {
   font-size: 14px;
 }
 
-/*# sourceMappingURL=dlk-addons-elementor.css.map */
+/* Post Price Table */
+.element-price-table {
+  text-align: center;
+}
+
+.element-price-table .element-price-table__item {
+  border: 1px solid rgba(9, 9, 9, 0.1);
+  padding: 30px;
+}
+
+.element-price-table .element-price-table__item .title {
+  position: relative;
+  color: #666;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+.element-price-table .element-price-table__item .title:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 140px;
+  height: 1px;
+  margin: 0 auto;
+  z-index: 1;
+  background-color: #dbdbdb;
+}
+
+.element-price-table .element-price-table__item .element-price-table__tag {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+.element-price-table .element-price-table__item .element-price-table__tag:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 140px;
+  height: 1px;
+  margin: 0 auto;
+  z-index: 1;
+  background-color: #dbdbdb;
+}
+
+.element-price-table .element-price-table__item .price-tag {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.element-price-table .element-price-table__item .price-tag del {
+  font-size: 22px;
+}
+
+.element-price-table .element-price-table__item .price-tag del .muted-price-currency {
+  font-size: 18px;
+}
+
+.element-price-table .element-price-table__item .price-tag .price-currency {
+  color: #00C853;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.element-price-table .element-price-table__item .price-tag .price-period {
+  color: #999;
+}
+
+.element-price-table .element-price-table__item .element-price-table__feature .item-list-feature {
+  font-size: 14px;
+  color: #6d6d6d;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(9, 9, 9, 0.04);
+}
+
+.element-price-table .element-price-table__item .element-price-table__feature .item-list-feature i {
+  margin-right: 5px;
+  color: #00C853;
+}
+
+.element-price-table .element-price-table__item .element-price-table__feature .item-list-feature:last-child {
+  border-bottom: 0;
+}
+
+.element-price-table .element-price-table__item .element-price-table__feature .item-list-feature.disable-item {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/*# sourceMappingURL=maps/dlk-addons-elementor.css.map */

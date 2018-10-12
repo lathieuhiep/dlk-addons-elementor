@@ -29,6 +29,9 @@
 
 @import "bootstrap-grid/bootstrap-grid";
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
 a {
   @include transition( all 0.4s ease-in-out );
 }
@@ -37,3 +40,6 @@ a {
 
 /* Post Type */
 @import "addons-elementor/post-type";
+
+/* Post Price Table */
+@import "addons-elementor/price-table";
