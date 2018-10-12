@@ -252,12 +252,110 @@ class Widget_DLK_Price_Table extends Widget_Base {
                         'list_title'    =>  esc_html__( '24/7 support', 'dlk-addons-elementorn' ),
                         'list_icon'     =>  'fa fa-check',
                     ],
-                    [
-                        'list_title'    =>  esc_html__( 'Pricing table list item', 'dlk-addons-elementorn' ),
-                        'list_icon'     =>  'fa fa-check',
-                    ],
                 ],
                 'title_field' => '{{{ list_title }}}',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /* Section Footer */
+        $this->start_controls_section(
+            'section_footer',
+            [
+                'label' =>  esc_html__( 'Footer', 'dlk-addons-elementor' )
+            ]
+        );
+
+        $this->add_control(
+            'button_icon', [
+                'label'     =>  esc_html__( 'Button Icon', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::ICON,
+                'default'   => '',
+            ]
+        );
+
+        $this->add_control(
+            'button_text',
+            [
+                'label'         =>  esc_html__( 'Button Text', 'dlk-addons-elementor' ),
+                'type'          =>  Controls_Manager::TEXT,
+                'default'       =>  esc_html__( 'Choose Plan', 'dlk-addons-elementor' ),
+                'label_block'   =>  true
+            ]
+        );
+
+        $this->add_control(
+            'button_link',
+            [
+                'label'         =>  esc_html__( 'Button Link', 'dlk-addons-elementor' ),
+                'type'          =>  Controls_Manager::URL,
+                'placeholder'   =>  esc_html__( 'https://your-link.com', 'dlk-addons-elementor' ),
+                'show_external' =>  true,
+                'default'       =>  [
+                    'url'   => '#',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /* Section Ribbon */
+        $this->start_controls_section(
+            'section_ribbon',
+            [
+                'label' =>  esc_html__( 'Ribbon', 'dlk-addons-elementor' )
+            ]
+        );
+
+        $this->add_control(
+            'ribbon_featured',
+            [
+                'type'          =>  Controls_Manager::SWITCHER,
+                'label'         =>  esc_html__('Featured ?', 'dlk-addons-elementor'),
+                'label_on'      =>  esc_html__('Yes', 'dlk-addons-elementor'),
+                'label_off'     =>  esc_html__('No', 'dlk-addons-elementor'),
+                'return_value'  =>  'yes',
+                'default'       =>  'no',
+            ]
+        );
+
+        $this->add_control(
+            'ribbon_style',
+            [
+                'label'     =>  esc_html__( 'Ribbon Style', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::SELECT,
+                'default'   =>  'ribbon-1',
+                'options'   =>  [
+                    'ribbon-1'  =>  esc_html__( 'Style 1', 'dlk-addons-elementor' ),
+                    'ribbon-2'  =>  esc_html__( 'Style 2', 'dlk-addons-elementor' ),
+                    'ribbon-3'  =>  esc_html__( 'Style 3', 'dlk-addons-elementor' ),
+                ],
+                'conditions'    =>  [
+                    'terms' =>  [
+                        [
+                            'name'  =>  'ribbon_featured',
+                            'value' =>  'yes',
+                        ],
+                    ]
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'featured_tag_text',
+            [
+                'label'         =>  esc_html__( 'Featured Tag Text', 'dlk-addons-elementor' ),
+                'type'          =>  Controls_Manager::TEXT,
+                'default'       =>  esc_html__( 'Featured', 'dlk-addons-elementor' ),
+                'label_block'   =>  false,
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item.ribbon-2:before, {{WRAPPER}} .element-price-table .element-price-table__item.ribbon-3:before'   =>  'content: "{{VALUE}}";',
+                ],
+                'condition'    =>  [
+                    'ribbon_style!'     =>  'ribbon-1',
+                    'ribbon_featured'   =>  'yes'
+                ]
             ]
         );
 
@@ -340,16 +438,25 @@ class Widget_DLK_Price_Table extends Widget_Base {
 
     protected function render() {
 
-        $settings           =   $this->get_settings_for_display();
-        $class_item_active  =   '';
+        $settings   =   $this->get_settings_for_display();
+        $target     =   $settings['button_link']['is_external'] ? ' target="_blank"' : '';
+        $nofollow   =   $settings['button_link']['nofollow'] ? ' rel="nofollow"' : '';
+
+        $class_ribbon_featured  =   '';
+
+        if ( $settings['ribbon_featured'] == 'yes' ) :
+            $class_ribbon_featured = ' ribbon-featured '. $settings['ribbon_style'];
+        endif;
 
     ?>
 
-        <div class="element-price-table <?php echo esc_attr( $settings['style-1'] ); ?>">
-            <div class="element-price-table__item">
-                <h2 class="title">
-                    <?php echo esc_html( $settings['title'] ); ?>
-                </h2>
+        <div class="element-price-table <?php echo esc_attr( $settings['pricing_style'] ); ?>">
+            <div class="element-price-table__item<?php echo esc_attr( $class_ribbon_featured ); ?>">
+                <div class="item-header">
+                    <h2 class="title">
+                        <?php echo esc_html( $settings['title'] ); ?>
+                    </h2>
+                </div>
 
                 <div class="element-price-table__tag">
                     <span class="price-tag">
@@ -433,21 +540,33 @@ class Widget_DLK_Price_Table extends Widget_Base {
 
                     <div class="element-price-table__feature">
 
-                        <?php
-                        foreach ( $settings['list'] as $item ) :
+                        <?php foreach ( $settings['list'] as $item ) : ?>
 
-                            if ( $item['item_active'] != 'yes' ) :
-                                $class_item_active = ' disable-item';
-                            endif;
-                        ?>
-
-                            <div class="item-list-feature<?php echo esc_attr( $class_item_active ) ?>">
+                            <div class="item-list-feature<?php echo esc_attr( $item['item_active'] != 'yes' ? ' disable-item' : '' ); ?>">
                                 <i class="elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?> <?php echo esc_attr( $item['list_icon'] ); ?>"></i>
                                 <?php echo esc_html( $item['list_title'] ); ?>
                             </div>
 
                         <?php endforeach; ?>
 
+                    </div>
+
+                <?php
+                endif;
+
+                if ( $settings['button_text'] ) :
+                ?>
+
+                    <div class="item_button">
+                        <a href="<?php echo esc_url( $settings['button_link']['url'] ); ?>" <?php echo esc_attr( $target . $nofollow ); ?>>
+                            <?php if ( $settings['button_icon'] ) : ?>
+                                <i class="<?php echo esc_attr( $settings['button_icon'] ); ?>"></i>
+                            <?php
+                            endif;
+
+                            echo esc_html( $settings['button_text'] );
+                            ?>
+                        </a>
                     </div>
 
                 <?php endif; ?>
