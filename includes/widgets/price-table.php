@@ -64,10 +64,7 @@ class Widget_DLK_Price_Table extends Widget_Base {
                 'label'         =>  esc_html__( 'Sub Title', 'dlk-addons-elementor' ),
                 'type'          =>  Controls_Manager::TEXT,
                 'default'       =>  esc_html__( 'A tagline here', 'dlk-addons-elementor' ),
-                'label_block'   =>  false,
-                'condition'     =>  [
-                    'pricing_style!' =>  'style-1',
-                ],
+                'label_block'   =>  false
             ]
         );
 
@@ -452,10 +449,29 @@ class Widget_DLK_Price_Table extends Widget_Base {
 
         <div class="element-price-table <?php echo esc_attr( $settings['pricing_style'] ); ?>">
             <div class="element-price-table__item<?php echo esc_attr( $class_ribbon_featured ); ?>">
+
+                <?php if ( $settings['pricing_style'] != 'style-1' && !empty( $settings['icon'] ) ) : ?>
+
+                    <div class="item-pricing-icon">
+                        <span class="icon-pricing">
+                            <i class="<?php echo esc_attr( $settings['icon'] )?>" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                <?php endif; ?>
+
                 <div class="item-header">
                     <h2 class="title">
                         <?php echo esc_html( $settings['title'] ); ?>
                     </h2>
+
+                    <?php if ( !empty( $settings['sub_title'] ) ) : ?>
+
+                        <span class="sub-title">
+                            <?php echo esc_html( $settings['sub_title'] ); ?>
+                        </span>
+
+                    <?php endif; ?>
                 </div>
 
                 <div class="element-price-table__tag">
