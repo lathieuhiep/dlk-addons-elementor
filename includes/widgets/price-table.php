@@ -41,9 +41,6 @@ class Widget_DLK_Price_Table extends Widget_Base {
                 'options'   =>  [
                     'style-1'   =>  esc_html__( 'Default', 'dlk-addons-elementor' ),
                     'style-2'   =>  esc_html__( 'Pricing Style 2', 'dlk-addons-elementor' ),
-                    'style-3'   =>  esc_html__( 'Pricing Style 3', 'dlk-addons-elementor' ),
-                    'style-4'   =>  esc_html__( 'Pricing Style 4', 'dlk-addons-elementor' ),
-                    'style-5'   =>  esc_html__( 'Pricing Style 5', 'dlk-addons-elementor' ),
                 ],
             ]
         );
@@ -462,6 +459,7 @@ class Widget_DLK_Price_Table extends Widget_Base {
 
         $this->end_controls_section();
 
+        /* Style Header */
         $this->start_controls_section(
             'section_style_header',
             [
@@ -537,6 +535,38 @@ class Widget_DLK_Price_Table extends Widget_Base {
             [
                 'name'      =>  'sub_title_typography',
                 'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item .sub-title',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /* Style Price */
+        $this->start_controls_section(
+            'section_style_price',
+            [
+                'label' => esc_html__( 'Price', 'dlk-addons-elementor' ),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_control(
+            'original_price_title',
+            [
+                'label'     =>  esc_html__( 'Original Price', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'original_price_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .price-tag'   =>  'color: {{VALUE}};',
+                ],
             ]
         );
 
