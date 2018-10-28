@@ -565,8 +565,16 @@ class Widget_DLK_Price_Table extends Widget_Base {
                 'type'      =>  Controls_Manager::COLOR,
                 'default'   =>  '',
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-price-table .element-price-table__item .price-tag'   =>  'color: {{VALUE}};',
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .price-tag del'   =>  'color: {{VALUE}};',
                 ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'      =>  'original_price_typography',
+                'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item .price-tag del',
             ]
         );
 
