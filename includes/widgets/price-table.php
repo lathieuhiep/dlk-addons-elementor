@@ -563,9 +563,9 @@ class Widget_DLK_Price_Table extends Widget_Base {
             [
                 'label'     =>  esc_html__( 'Color', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::COLOR,
-                'default'   =>  '',
+                'default'   =>  '#999999',
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-price-table .element-price-table__item .price-tag del'   =>  'color: {{VALUE}};',
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .muted-price'   =>  'color: {{VALUE}};',
                 ],
             ]
         );
@@ -574,9 +574,302 @@ class Widget_DLK_Price_Table extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name'      =>  'original_price_typography',
-                'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item .price-tag del',
+                'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item .muted-price',
             ]
         );
+
+        $this->add_control(
+            'sale_price_title',
+            [
+                'label'     =>  esc_html__( 'Sale Price', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'sale_price_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .price-tag'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'      =>  'sale_price_typography',
+                'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item .price-tag',
+            ]
+        );
+
+        $this->add_control(
+            'currency_title',
+            [
+                'label'     =>  esc_html__( 'Currency', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'currency_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .price-tag .price-currency'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'      =>  'currency_typography',
+                'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item .price-tag .price-currency',
+            ]
+        );
+
+        $this->add_control(
+            'pricing_period_title',
+            [
+                'label'     =>  esc_html__( 'Pricing Period', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'pricing_period_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .price-period'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'      =>  'pricing_period_typography',
+                'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item .price-period',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /* Style Feature List */
+        $this->start_controls_section(
+            'section_style_feature_list',
+            [
+                'label' => esc_html__( 'Feature List', 'dlk-addons-elementor' ),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_control(
+            'feature_list_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .element-price-table__feature .item-list-feature'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'feature_disable_list_color',
+            [
+                'label'     =>  esc_html__( 'Disable item color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .element-price-table__feature .item-list-feature.disable-item'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'      =>  'feature_list_typography',
+                'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item .element-price-table__feature .item-list-feature',
+            ]
+        );
+
+        $this->end_controls_section();
+
+        /* Style Button */
+        $this->start_controls_section(
+            'section_style_button',
+            [
+                'label' => esc_html__( 'Button', 'dlk-addons-elementor' ),
+                'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_control(
+            'padding_button',
+            [
+                'label'         =>  esc_html__( 'Padding', 'dlk-addons-elementor' ),
+                'type'          =>  Controls_Manager::DIMENSIONS,
+                'size_units'    =>  [ 'px', '%', 'em' ],
+                'selectors'     =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .item_button a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'margin_button',
+            [
+                'label'         =>  esc_html__( 'Margin', 'dlk-addons-elementor' ),
+                'type'          =>  Controls_Manager::DIMENSIONS,
+                'size_units'    =>  [ 'px', '%', 'em' ],
+                'selectors'     =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .item_button a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'      =>  'button_typography',
+                'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item .item_button a',
+            ]
+        );
+
+        $this->start_controls_tabs(
+            'style_tabs'
+        );
+
+        // Start Normal Tabs
+        $this->start_controls_tab(
+            'style_normal_tab',
+            [
+                'label' => esc_html__( 'Normal', 'dlk-addons-elementor' ),
+            ]
+        );
+
+        $this->add_control(
+            'button_text_color',
+            [
+                'label'     =>  esc_html__( 'Text Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .item_button a'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'button_bk_color',
+            [
+                'label'     =>  esc_html__( 'Background Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .item_button a'   =>  'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'      =>  'border',
+                'label'     =>  esc_html__( 'Border', 'dlk-addons-elementor' ),
+                'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item .item_button a',
+            ]
+        );
+
+        $this->add_control(
+            'button_border_radius',
+            [
+                'label'         =>  esc_html__( 'Border Radius', 'dlk-addons-elementor' ),
+                'type'          =>  Controls_Manager::SLIDER,
+                'size_units'    =>  [ 'px' ],
+                'range'         =>  [
+                    'px'    => [
+                        'min'   =>  0,
+                        'max'   =>  50,
+                        'step'  =>  1,
+                    ],
+                ],
+                'default'   => [
+                    'unit'  =>  'px',
+                    'size'  =>  '',
+                ],
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .item_button a' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+        // End Normal Tabs
+
+        // Start Hover Tabs
+        $this->start_controls_tab(
+            'style_hover_tab',
+            [
+                'label' => esc_html__( 'Hover', 'dlk-addons-elementor' ),
+            ]
+        );
+
+        $this->add_control(
+            'button_text_color_hover',
+            [
+                'label'     =>  esc_html__( 'Text Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .item_button a:hover'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'button_bk_color_hover',
+            [
+                'label'     =>  esc_html__( 'Background Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .item_button a:hover'   =>  'background-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'button_border_color_hover',
+            [
+                'label'     =>  esc_html__( 'Border Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item .item_button a:hover'   =>  'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+        // End Hover Tabs
+
+        $this->end_controls_tabs();
 
         $this->end_controls_section();
 
