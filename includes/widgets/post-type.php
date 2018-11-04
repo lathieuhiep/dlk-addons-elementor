@@ -376,7 +376,7 @@ class Widget_DLK_Post_Type extends Widget_Base {
         endif;
     }
 
-    protected function content_template() {}
+    protected function _content_template() {}
 
 }
 
