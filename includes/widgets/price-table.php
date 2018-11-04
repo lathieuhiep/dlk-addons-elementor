@@ -873,6 +873,82 @@ class Widget_DLK_Price_Table extends Widget_Base {
 
         $this->end_controls_section();
 
+        /* Start Style Ribbon */
+        $this->start_controls_section(
+            'section_style_ribbon',
+            [
+                'label'     =>  esc_html__( 'Ribbon', 'dlk-addons-elementor' ),
+                'tab'       =>  Controls_Manager::TAB_STYLE,
+                'condition' =>  [
+                    'ribbon_featured'   =>  'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'ribbon_line_color',
+            [
+                'label'     =>  esc_html__( 'Line Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item.ribbon-1:before'   =>  'background-color: {{VALUE}};',
+                ],
+                'condition'    =>  [
+                    'ribbon_style'      =>  'ribbon-1',
+                    'ribbon_featured'   =>  'yes'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'      =>  'ribbon_text_typography',
+                'selector'  =>  '{{WRAPPER}} .element-price-table .element-price-table__item.ribbon-2:before, {{WRAPPER}} .element-price-table .element-price-table__item.ribbon-3:before',
+                'condition' =>  [
+                    'ribbon_style'      =>  [ 'ribbon-2', 'ribbon-3' ],
+                    'ribbon_featured'   =>  'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'ribbon_color_text',
+            [
+                'label'     =>  esc_html__( 'Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item.ribbon-2:before, {{WRAPPER}} .element-price-table .element-price-table__item.ribbon-3:before'   =>  'color: {{VALUE}};',
+                ],
+                'condition'    =>  [
+                    'ribbon_style'      =>  [ 'ribbon-2', 'ribbon-3' ],
+                    'ribbon_featured'   =>  'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'ribbon_background_color',
+            [
+                'label'     =>  esc_html__( 'Background Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-price-table .element-price-table__item.ribbon-2:before, {{WRAPPER}} .element-price-table .element-price-table__item.ribbon-3:before'   =>  'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .element-price-table .element-price-table__item.ribbon-2:after'   =>  'border-bottom-color: {{VALUE}};'
+                ],
+                'condition'    =>  [
+                    'ribbon_style'      =>  [ 'ribbon-2', 'ribbon-3' ],
+                    'ribbon_featured'   =>  'yes'
+                ]
+            ]
+        );
+
+        $this->end_controls_section();
+        /* End Style Ribbon */
+
     }
 
     protected function render() {
@@ -1035,7 +1111,54 @@ class Widget_DLK_Price_Table extends Widget_Base {
 
     }
 
-    protected function content_template() {}
+    protected function content_template() {
+
+    ?>
+
+        <#
+        var target = settings.website_link.is_external ? ' target="_blank"' : '';
+        var nofollow = settings.website_link.nofollow ? ' rel="nofollow"' : '';
+
+        var class_ribbon_featured  =   '';
+
+        if ( settings.ribbon_featured === 'yes' ) {
+            class_ribbon_featured = ' ribbon-featured-'settings.ribbon_style;
+        }
+        #>
+
+        <div class="element-price-table {{ settings.pricing_style }}">
+            <div class="element-price-table__item{{ class_ribbon_featured }}">
+
+                <# if ( settings.pricing_style !== 'style-1' && settings.icon ) { #>
+
+                    <div class="item-pricing-icon">
+                        <span class="icon-pricing">
+                            <i class="{{ settings.icon }}" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                <# } #>
+
+                <div class="item-header">
+                    <h2 class="title">
+                        {{{ settings.title }}}
+                    </h2>
+
+                    <# if ( settings.sub_title ) { #>
+
+                        <span class="sub-title">
+                            {{{ settings.sub_title }}}
+                        </span>
+
+                    <# } #>
+                </div>
+
+            </div>
+        </div>
+
+    <?php
+
+    }
 
 }
 
