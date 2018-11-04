@@ -960,7 +960,7 @@ class Widget_DLK_Price_Table extends Widget_Base {
         $class_ribbon_featured  =   '';
 
         if ( $settings['ribbon_featured'] == 'yes' ) :
-            $class_ribbon_featured = ' ribbon-featured '. $settings['ribbon_style'];
+            $class_ribbon_featured = ' ribbon-featured ' . $settings['ribbon_style'];
         endif;
 
     ?>
@@ -1111,18 +1111,18 @@ class Widget_DLK_Price_Table extends Widget_Base {
 
     }
 
-    protected function content_template() {
+    protected function _content_template() {
 
     ?>
 
         <#
-        var target = settings.website_link.is_external ? ' target="_blank"' : '';
-        var nofollow = settings.website_link.nofollow ? ' rel="nofollow"' : '';
+        var target = settings.button_link.is_external ? ' target="_blank"' : '';
+        var nofollow = settings.button_link.nofollow ? ' rel="nofollow"' : '';
 
         var class_ribbon_featured  =   '';
 
         if ( settings.ribbon_featured === 'yes' ) {
-            class_ribbon_featured = ' ribbon-featured-'settings.ribbon_style;
+            class_ribbon_featured = ' ribbon-featured ' + settings.ribbon_style;
         }
         #>
 
@@ -1153,6 +1153,104 @@ class Widget_DLK_Price_Table extends Widget_Base {
                     <# } #>
                 </div>
 
+                <div class="element-price-table__tag">
+                    <span class="price-tag">
+
+                        <# if ( settings.on_sale !== 'yes' ) { #>
+
+                            <# if ( settings.currency_placement === 'left' ) { #>
+
+                                <span class="price-currency">
+                                    {{{ settings.price_currency }}}
+                                </span>
+
+                            <# } #>
+
+                            {{{ settings.price }}}
+
+                            <# if ( settings.currency_placement === 'right' ) { #>
+
+                                <span class="price-currency">
+                                    {{{ settings.price_currency }}}
+                                </span>
+
+                            <# } #>
+
+                        <# } else { #>
+
+                            <# if ( settings.currency_placement === 'left' ) { #>
+
+                                <del class="muted-price">
+                                    <span class="muted-price-currency">
+                                        {{{ settings.price_currency }}}
+                                    </span>
+
+                                    {{{ settings.price }}}
+                                </del>
+
+                                <span class="price-currency">
+                                    {{{ settings.price_currency }}}
+                                </span>
+
+                                {{{ settings.sale_price }}}
+
+                            <# } else { #>
+
+                                <del class="muted-price">
+                                    {{{ settings.price }}}
+
+                                    <span class="muted-price-currency">
+                                        {{{ settings.price_currency }}}
+                                    </span>
+                                </del>
+
+                                {{{ settings.sale_price }}}
+
+                                <span class="price-currency">
+                                    {{{ settings.price_currency }}}
+                                </span>
+
+                            <# } #>
+
+                        <# } #>
+
+                    </span>
+
+                    <span class="price-period">
+                        {{{ settings.period_separator }}}&nbsp;{{{ settings.price_period }}}
+                    </span>
+                </div>
+
+                <# if ( settings.list.length ) { #>
+
+                    <div class="element-price-table__feature">
+
+                        <# _.each( settings.list, function( item ) { #>
+
+                            <div class="item-list-feature{{ item.item_active !== 'yes' ? ' disable-item' : '' }}">
+                                <i class="elementor-repeater-item-{{ item._id }} {{ item.list_icon }}"></i>
+                                {{{ item.list_title }}}
+                            </div>
+
+                        <# } ); #>
+
+                    </div>
+
+                <# } #>
+
+                <# if ( settings.button_text ) { #>
+
+                    <div class="item_button">
+                        <a href="{{ settings.button_link.url }}"{{ target }}{{ nofollow }}>
+                            <# if ( settings.button_icon ) { #>
+                                <i class="{{ settings.button_icon }}"></i>
+                            <# } #>
+
+                            {{{ settings.button_text }}}
+                        </a>
+                    </div>
+
+                <# } #>
             </div>
         </div>
 
