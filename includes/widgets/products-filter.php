@@ -171,7 +171,7 @@ class Widget_DLK_Products_Filter extends Widget_Base {
 
     ?>
 
-        <div class="element-products-filter">
+        <div class="element-products-filter t">
             <?php if ( !empty( $settings['title'] ) ) : ?>
                 <h4 class="title">
                     <?php echo esc_html( $settings['title'] ); ?>
