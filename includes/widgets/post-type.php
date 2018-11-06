@@ -19,7 +19,7 @@ class Widget_DLK_Post_Type extends Widget_Base {
     }
 
     public function get_icon() {
-        return 'eicon-post';
+        return 'fa fa-newspaper-o';
     }
 
     protected function _register_controls() {
@@ -334,13 +334,30 @@ class Widget_DLK_Post_Type extends Widget_Base {
     ?>
 
         <div class="element-post-type">
+            <?php if ( !empty( $settings['title'] ) ) : ?>
+                <h4 class="title">
+                    <?php echo esc_html( $settings['title'] ); ?>
+                </h4>
+            <?php endif; ?>
+
             <div class="row">
                 <?php while ( $post_type_query->have_posts() ): $post_type_query->the_post(); ?>
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-<?php echo esc_attr( 12 / $settings['column_number'] ); ?>">
                     <div class="item-post">
                         <div class="item-post__thumbnail">
-                            <img src="<?php echo esc_url( Group_Control_Image_Size::get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'thumbnail', $settings ) ); ?>" alt="<?php the_title(); ?>">
+                            <?php if ( has_post_thumbnail() ) : ?>
+                            
+                                <img src="<?php echo esc_url( Group_Control_Image_Size::get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'thumbnail', $settings ) ); ?>" alt="<?php the_title(); ?>">
+                            
+                            <?php
+                            else:
+                                $no_team_member_image  =   dlk_addons_elementor_path . 'assets/images/no-images.png';
+                            ?>
+
+                                <img src="<?php echo esc_url( $no_team_member_image ) ?>" alt="<?php the_title(); ?>" />
+                            
+                            <?php endif; ?>
                         </div>
 
                         <h2 class="item-post__title">

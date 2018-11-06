@@ -31,7 +31,10 @@ class dlk_addons_elementor_widgets {
         require_once ( dlk_addons_elementor_server_path . '/includes/widgets/post-type.php' );
         require_once ( dlk_addons_elementor_server_path . '/includes/widgets/team-members.php' );
         require_once ( dlk_addons_elementor_server_path . '/includes/widgets/price-table.php' );
-        require_once ( dlk_addons_elementor_server_path . '/includes/widgets/products-filter.php' );
+
+        if ( class_exists('Woocommerce') ) :
+            require_once ( dlk_addons_elementor_server_path . '/includes/widgets/products-filter.php' );
+        endif;
 
     }
 

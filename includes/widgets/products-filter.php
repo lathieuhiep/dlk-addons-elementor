@@ -19,7 +19,7 @@ class Widget_DLK_Products_Filter extends Widget_Base {
     }
 
     public function get_icon() {
-        return 'eicon-post';
+        return 'fa fa-filter';
     }
 
     protected function _register_controls() {
