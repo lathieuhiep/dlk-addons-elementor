@@ -183,7 +183,7 @@ class Widget_DLK_Products_Filter extends Widget_Base {
 
                     <div class="col-12 col-sm-6 col-md-4 col-lg-<?php echo esc_attr( 12 / $settings['column_number'] ); ?>">
                         <div class="item-product">
-                            <div class="item-thumbnail">
+                            <div class="item-thumbnail t">
                                 <?php if ( has_post_thumbnail() ) : ?>
 
                                     <img src="<?php echo esc_url( Group_Control_Image_Size::get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'thumbnail', $settings ) ); ?>" alt="<?php the_title(); ?>">
