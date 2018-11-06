@@ -1694,6 +1694,14 @@ a {
 }
 
 /* Post Type */
+.element-post-type .title {
+  text-align: center;
+}
+
+.element-post-type .item-post {
+  margin-bottom: 15px;
+}
+
 .element-post-type .item-post .item-post__thumbnail {
   margin-bottom: 15px;
 }
@@ -1948,4 +1956,4 @@ a {
   padding: 10px 15px;
 }
 
-/*# sourceMappingURL=dlk-addons-elementor.css.map */
+/*# sourceMappingURL=maps/dlk-addons-elementor.css.map */
