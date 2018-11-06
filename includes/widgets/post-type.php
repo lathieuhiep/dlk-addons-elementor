@@ -162,12 +162,22 @@ class Widget_DLK_Post_Type extends Widget_Base {
 
         $this->end_controls_section();
 
-        /* Section style title */
+        /* Section style post */
         $this->start_controls_section(
-            'section_style_title',
+            'section_style_post',
             [
-                'label' => esc_html__( 'Title', 'dlk-addons-elementor' ),
+                'label' => esc_html__( 'Color & Typography', 'dlk-addons-elementor' ),
                 'tab' => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        // Style title
+        $this->add_control(
+            'title_options',
+            [
+                'label'     =>  esc_html__( 'Title', 'plugin-name' ),
+                'type'      =>  \Elementor\Controls_Manager::HEADING,
+                'separator' =>  'before',
             ]
         );
 
@@ -178,19 +188,7 @@ class Widget_DLK_Post_Type extends Widget_Base {
                 'type'      =>  Controls_Manager::COLOR,
                 'default'   =>  '',
                 'selectors' =>  [
-                    '{{WRAPPER}} .element-post-type .item-post .item-post__title a'   =>  'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'title_color_hover',
-            [
-                'label'     =>  esc_html__( 'Color Hover', 'dlk-addons-elementor' ),
-                'type'      =>  Controls_Manager::COLOR,
-                'default'   =>  '',
-                'selectors' =>  [
-                    '{{WRAPPER}} .element-post-type .item-post .item-post__title a:hover'   =>  'color: {{VALUE}};',
+                    '{{WRAPPER}} .element-post-type .title'   =>  'color: {{VALUE}};',
                 ],
             ]
         );
@@ -199,12 +197,54 @@ class Widget_DLK_Post_Type extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'title_typography',
+                'selector' => '{{WRAPPER}} .element-post-type .title',
+            ]
+        );
+
+        // Style title post
+        $this->add_control(
+            'title_post_options',
+            [
+                'label'     =>  esc_html__( 'Title Post', 'plugin-name' ),
+                'type'      =>  \Elementor\Controls_Manager::HEADING,
+                'separator' =>  'before',
+            ]
+        );
+
+        $this->add_control(
+            'title_post_color',
+            [
+                'label'     =>  esc_html__( 'Color', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-post-type .item-post__title a'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'title_post_color_hover',
+            [
+                'label'     =>  esc_html__( 'Color Hover', 'dlk-addons-elementor' ),
+                'type'      =>  Controls_Manager::COLOR,
+                'default'   =>  '',
+                'selectors' =>  [
+                    '{{WRAPPER}} .element-post-type .item-post__title a:hover'   =>  'color: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'title_post_typography',
                 'selector' => '{{WRAPPER}} .element-post-type .item-post .item-post__title',
             ]
         );
 
         $this->add_control(
-            'title_alignment',
+            'title_post_alignment',
             [
                 'label'     =>  esc_html__( 'Title Alignment', 'dlk-addons-elementor' ),
                 'type'      =>  Controls_Manager::CHOOSE,
@@ -233,14 +273,13 @@ class Widget_DLK_Post_Type extends Widget_Base {
             ]
         );
 
-        $this->end_controls_section();
-
-        /* Section style excerpt  */
-        $this->start_controls_section(
-            'section_style_excerpt',
+        // Style excerpt post
+        $this->add_control(
+            'excerpt_post_options',
             [
-                'label' => esc_html__( 'Excerpt', 'dlk-addons-elementor' ),
-                'tab' => Controls_Manager::TAB_STYLE
+                'label'     =>  esc_html__( 'Excerpt Post', 'plugin-name' ),
+                'type'      =>  \Elementor\Controls_Manager::HEADING,
+                'separator' =>  'before',
             ]
         );
 
